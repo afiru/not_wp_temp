@@ -1,0 +1,92 @@
+@charset "utf-8";
+@import 'sass_base/mixin';
+@import 'sass_base/animate';
+@import 'sass_base/icon_arrow';
+
+//基本設定
+ul,li,dd,dt,dh {
+    list-style: none;
+}
+svg {
+    display: block;
+}
+
+.pc_only {
+    @include pc_only();
+}
+.sp_only {
+    @include sp_only();
+}
+.pc_display_flex_center {
+    @include media($pc){
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    @include media($tab) {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    @include media($sp) {
+        display: none;
+    }
+}
+.sp_display_flex_center {
+    @include media($pc){
+        display: none;
+    }
+    @include media($tab) {
+        display: none;
+    }
+    @include media($sp) {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+.wapper {
+    @include wapper_setting();
+    
+}
+.t_center {
+    text-align: center;
+}
+@for $i from 0 through 30 {
+    $list : $i * 10;
+    .margin_#{$list} {
+        @include marginPercent(1920 , $list , auto , 0 , auto );
+    }
+    @for $x from 0 through 30 {
+	$listx : $x * 10;
+	.padding_top_#{$i * 10}_bottom_#{$x * 10} {
+		@include paddingPercent(1920 , $list , 0 , $listx , 0);
+	}
+    }
+}
+@for $i from 0 through 10 {
+	@for $x from 0 through 10 {
+	    .pc_order_#{$i}_sp_#{$x} {
+	        order: $i;
+	        @include media($sp) {
+	            order: $x;
+	        }
+	    }
+	}
+	.pc_order_#{$i} {
+		order: $i;
+	        @include media($sp) {
+	            order: auto;
+	        }
+	}
+}
+.kinout_text {
+  text-align: justify;
+  text-justify: inter-ideograph;    
+}
+
+//トップページ部分
+@import 'main_include/index/_index';
+//フッター部分
+@import 'main_include/footer/_footer';
+@import 'lightbox.min';
